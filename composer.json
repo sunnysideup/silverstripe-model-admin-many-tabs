@@ -21,7 +21,7 @@
   ],
   "require": {
     "silverstripe/framework": "~4.0",
-    "silverstripe/recipe-cms": "*"
+    "silverstripe/lumberjack": "*"
   },
   "extra": {
     "expose": [
