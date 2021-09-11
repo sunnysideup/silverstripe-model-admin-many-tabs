@@ -15,7 +15,23 @@ class MyModelAdmin extends ModelAdmin
         $fields = $form->Fields();
 
         if (MySpecialClass::class === $this->modelClass) {
-            TabsBuilder::add_many_tabs($arrayOfTabs, $id, $fields, $form)
+            TabsBuilder::add_many_tabs(
+                $arrayOfTabs = [
+                    [
+                        'TabName' => 'LowCostSales',
+                        'Title' => 'Low Cost Sales',
+                        'List' => Order::get()->filter(['Total:lowerThan' => 400]),
+                    ],
+                    [
+                        'TabName' => 'HighCostSales',
+                        'Title' => 'High Cost Sales',
+                        'List' => Order::get()->filter(['Total:greaterThan' => 400]),
+                    ]
+                ],
+                $form,
+                $this->modelClass,
+                50
+            );
         }
         return $form;
     }
