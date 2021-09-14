@@ -24,6 +24,7 @@ class TabsBuilder
     public static function add_many_tabs(array $arrayOfTabs, Form $form, string $modelToReplace, $itemsPerPage = 100)
     {
         $modelToReplaceName = str_replace('\\', '-', $modelToReplace);
+        $fields = $form->Fields();
         $fields->insertAfter(
             $modelToReplaceName,
             $parentTab = new TabSet(
@@ -32,13 +33,13 @@ class TabsBuilder
             )
         );
         $fields->removeByName($modelToReplaceName);
-        $singleton = Injector::inst() - get($modelToReplace);
+        $singleton = Injector::inst()->get($modelToReplace);
         if ($singleton instanceof SiteTree) {
             $config = GridFieldConfig_Lumberjack::create($itemsPerPage);
         } else {
             $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
         }
-        foreach ($array as $item) {
+        foreach ($arrayOfTabs as $item) {
             $gridField = new GridField(
                 $item['TabName'],
                 $item['Title'],
