@@ -6,6 +6,7 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
@@ -39,6 +40,7 @@ class TabsBuilder
         } else {
             $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
         }
+        $config->removeComponentsByType(GridFieldAddNewButton::class);
         foreach ($arrayOfTabs as $item) {
             $gridField = new GridField(
                 $item['TabName'],
