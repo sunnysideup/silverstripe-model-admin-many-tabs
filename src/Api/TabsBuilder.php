@@ -41,6 +41,7 @@ class TabsBuilder
             $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
         }
         $config->removeComponentsByType(GridFieldAddNewButton::class);
+        //important!
         foreach ($arrayOfTabs as $item) {
             $gridField = new GridField(
                 $item['TabName'],
@@ -56,6 +57,10 @@ class TabsBuilder
                     $gridField
                 )
             );
+            $editForm = $gridField->getConfig()->getComponentByType(GridFieldDetailForm::class);
+            if($editForm) {
+                $editForm->setRedirectMissingRecords(true);
+            }
         }
     }
 }
