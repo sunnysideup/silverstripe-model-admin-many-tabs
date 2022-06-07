@@ -20,12 +20,12 @@ class MyModelAdmin extends ModelAdmin
                     [
                         'TabName' => 'LowCostSales',
                         'Title' => 'Low Cost Sales',
-                        'List' => Order::get()->filter(['Total:lowerThan' => 400]),
+                        'List' => Order::get()->filter(['Total:LowerThan' => 400]),
                     ],
                     [
                         'TabName' => 'HighCostSales',
                         'Title' => 'High Cost Sales',
-                        'List' => Order::get()->filter(['Total:greaterThan' => 400]),
+                        'List' => Order::get()->filter(['Total:GreaterThan' => 400]),
                     ]
                 ],
                 $form,
