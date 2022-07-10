@@ -30,7 +30,7 @@ class MyModelAdmin extends ModelAdmin
                 ],
                 $form,
                 $this->modelClass,
-                50
+                $itemsPerPage = 10
             );
         }
         return $form;
