@@ -6,9 +6,9 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Lumberjack\Forms\GridFieldConfig_Lumberjack;
@@ -55,7 +55,7 @@ class TabsBuilder
             $parentTab->push(
                 new Tab(
                     str_replace(' ', '', (string) $item['Title']),
-                    $item['Title'] .' ('.$count.')',
+                    $item['Title'] . ' (' . $count . ')',
                     $gridField
                 )
             );
