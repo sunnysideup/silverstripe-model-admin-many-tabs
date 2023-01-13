@@ -54,7 +54,7 @@ class TabsBuilder
             $gridField->setForm($form);
             $parentTab->push(
                 new Tab(
-                    str_replace(' ', '', $item['Title']),
+                    str_replace(' ', '', (string) $item['Title']),
                     $item['Title'] .' ('.$count.')',
                     $gridField
                 )
