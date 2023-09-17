@@ -59,6 +59,7 @@ class TabsBuilder
                     $gridField
                 )
             );
+            /**  @var GridFieldDetailForm $editForm */
             $editForm = $gridField->getConfig()->getComponentByType(GridFieldDetailForm::class);
             if ($editForm) {
                 $editForm->setRedirectMissingRecords(true);
