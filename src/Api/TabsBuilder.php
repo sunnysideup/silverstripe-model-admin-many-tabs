@@ -20,6 +20,7 @@ class TabsBuilder
      *                            TabName => string,
      *                            Title => string,
      *                            List => DataList
+     *                            AllowAddNew => bool (model must have CMSEditLink)
      *                            ]
      * @param int   $itemsPerPage - optional
      */
@@ -36,14 +37,16 @@ class TabsBuilder
         );
         $fields->removeByName($modelToReplaceName);
         $singleton = Injector::inst()->get($modelToReplace);
-        if ($singleton instanceof SiteTree) {
-            $config = GridFieldConfig_Lumberjack::create($itemsPerPage);
-        } else {
-            $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
-        }
-        $config->removeComponentsByType(GridFieldAddNewButton::class);
         //important!
         foreach ($arrayOfTabs as $item) {
+            if ($singleton instanceof SiteTree) {
+                $config = GridFieldConfig_Lumberjack::create($itemsPerPage);
+            } else {
+                $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
+            }
+            if (!(isset($item['AllowAddNew']) && $item['AllowAddNew'])) {
+                $config->removeComponentsByType(GridFieldAddNewButton::class);
+            }
             $gridField = new GridField(
                 $item['TabName'],
                 $item['Title'],
