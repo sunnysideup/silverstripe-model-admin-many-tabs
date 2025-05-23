@@ -20,6 +20,7 @@ class MyModelAdmin extends ModelAdmin
                         'TabName' => 'LowCostSales',
                         'Title' => 'Low Cost Sales',
                         'List' => Order::get()->filter(['Total:LowerThan' => 400]),
+                        'AllowAddNew' => true, // modeladmin must have CMSEditLink
                     ],
                     [
                         'TabName' => 'HighCostSales',
