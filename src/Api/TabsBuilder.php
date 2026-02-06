@@ -44,7 +44,7 @@ class TabsBuilder
             } else {
                 $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
             }
-            if (!(isset($item['AllowAddNew']) && $item['AllowAddNew'])) {
+            if (! (isset($item['AllowAddNew']) && $item['AllowAddNew'])) {
                 $config->removeComponentsByType(GridFieldAddNewButton::class);
             }
             $gridField = new GridField(
@@ -62,7 +62,7 @@ class TabsBuilder
                     $gridField
                 )
             );
-            /**  @var GridFieldDetailForm $editForm */
+            /** @var GridFieldDetailForm $editForm */
             $editForm = $gridField->getConfig()->getComponentByType(GridFieldDetailForm::class);
             if ($editForm) {
                 $editForm->setRedirectMissingRecords(true);
