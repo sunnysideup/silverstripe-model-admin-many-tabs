@@ -30,12 +30,10 @@ class TabsBuilder
         $fields = $form->Fields();
         $fields->insertAfter(
             $modelToReplaceName,
-            $parentTab = new TabSet(
-                $modelToReplaceName . 'inner',
-                []
-            )
+            $parentTab = TabSet::create($modelToReplaceName . 'inner', [])
         );
         $fields->removeByName($modelToReplaceName);
+
         $singleton = Injector::inst()->get($modelToReplace);
         //important!
         foreach ($arrayOfTabs as $item) {
@@ -44,23 +42,16 @@ class TabsBuilder
             } else {
                 $config = GridFieldConfig_RecordEditor::create($itemsPerPage);
             }
+
             if (! (isset($item['AllowAddNew']) && $item['AllowAddNew'])) {
                 $config->removeComponentsByType(GridFieldAddNewButton::class);
             }
-            $gridField = new GridField(
-                $item['TabName'],
-                $item['Title'],
-                $item['List'],
-                $config
-            );
+
+            $gridField = GridField::create($item['TabName'], $item['Title'], $item['List'], $config);
             $count = $item['List']->count();
             $gridField->setForm($form);
             $parentTab->push(
-                new Tab(
-                    str_replace(' ', '', (string) $item['Title']),
-                    $item['Title'] . ' (' . $count . ')',
-                    $gridField
-                )
+                Tab::create(str_replace(' ', '', (string) $item['Title']), $item['Title'] . ' (' . $count . ')', $gridField)
             );
             /** @var GridFieldDetailForm $editForm */
             $editForm = $gridField->getConfig()->getComponentByType(GridFieldDetailForm::class);
